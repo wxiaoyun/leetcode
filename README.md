@@ -1,6 +1,6 @@
 # leetcode
 
-## Submitted
+## Finished And Submitted
 
 Working solutions that are submitted to the TIPS website
 

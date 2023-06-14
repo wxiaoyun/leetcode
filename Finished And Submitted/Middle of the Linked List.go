@@ -1,3 +1,5 @@
+package leetcode
+
 // Given the head of a singly linked list, return the middle node of the linked list.
 
 // If there are two middle nodes, return the second middle node.
@@ -22,11 +24,26 @@
 
 /**
  * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
  */
-func middleNode(head *ListNode) *ListNode {
 
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
+func middleNode(head *ListNode) *ListNode {
+	half := length(head) / 2
+
+	for ; half > 0; half-- {
+		head = head.Next
+	}
+
+	return head
+}
+
+func length(node *ListNode) int {
+	if node == nil {
+		return 0
+	}
+	return 1 + length(node.Next)
 }
