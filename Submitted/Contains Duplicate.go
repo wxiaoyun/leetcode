@@ -1,3 +1,5 @@
+package leetcode
+
 // Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
 
 // Example 1:
@@ -21,5 +23,12 @@
 // https://leetcode.com/problems/contains-duplicate/
 
 func containsDuplicate(nums []int) bool {
-
+	seen := make(map[int]bool)
+	for _, num := range nums {
+		if _, ok := seen[num]; ok {
+			return true
+		}
+		seen[num] = true
+	}
+	return false
 }

@@ -1,10 +1,10 @@
 # leetcode
 
+## Submitted
+
+Working solutions that are submitted to the TIPS website
+
 ## Finished
-
-Working solutions
-
-## Bank
 
 Working solutions that is not submitted to the TIPS website
 
@@ -12,6 +12,6 @@ Working solutions that is not submitted to the TIPS website
 
 Problem that I am working on
 
-## Todo
+## Todos
 
 Problems that I want to work on
