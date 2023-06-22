@@ -30,5 +30,23 @@ package leetcode
 // https://leetcode.com/problems/maximum-subarray/
 
 func maxSubArray(nums []int) int {
+	// Kadane's algorithm
+	// https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm
 
+	max := nums[0]
+	current := nums[0]
+
+	for i := 1; i < len(nums); i++ {
+		current = maxInt(current+nums[i], nums[i])
+		max = maxInt(current, max)
+	}
+
+	return max
+}
+
+func maxInt(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
