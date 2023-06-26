@@ -1,5 +1,7 @@
 package leetcode
 
+import "leetcode/ds"
+
 // Given the head of a singly linked list, reverse the list, and return the reversed list.
 
 // Example 1:
@@ -25,17 +27,13 @@ package leetcode
 // https://leetcode.com/problems/reverse-linked-list/
 
 // Definition for singly-linked list.
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
 
-func reverseList(head *ListNode) *ListNode {
+func reverseList(head *ds.ListNode) *ds.ListNode {
 	if head == nil {
 		return head
 	}
 
-	var prev *ListNode = nil
+	var prev *ds.ListNode = nil
 	curr := head
 
 	for curr != nil {

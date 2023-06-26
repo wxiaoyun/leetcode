@@ -1,6 +1,6 @@
 package leetcode
 
-func longestPalindrome(s string) string {
+func longestPalindrome2(s string) string {
 	answer := ""
 	for i := range s {
 		answer1 := expand(s, i, i)

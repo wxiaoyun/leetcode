@@ -1,16 +1,13 @@
 package leetcode
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
+import "leetcode/ds"
 
-func removeNthFromEnd(head *ListNode, n int) *ListNode {
+func removeNthFromEnd(head *ds.ListNode, n int) *ds.ListNode {
 	if n == 0 {
 		return head
 	}
 
-	length := helper(head, n)
+	length := helper2(head, n)
 	if length == n {
 		return head.Next
 	}
@@ -18,12 +15,12 @@ func removeNthFromEnd(head *ListNode, n int) *ListNode {
 	return head
 }
 
-func helper(l *ListNode, n int) int {
+func helper2(l *ds.ListNode, n int) int {
 	if l == nil {
 		return 0
 	}
 
-	length := 1 + helper(l.Next, n)
+	length := 1 + helper2(l.Next, n)
 	if length == n+1 {
 		l.Next = l.Next.Next
 	}

@@ -25,17 +25,17 @@ package leetcode
 // https://leetcode.com/problems/climbing-stairs/
 
 func climbStairs(n int) int {
-	return helper(make([]int, n+1), n)
+	return helper4(make([]int, n+1), n)
 }
 
-func helper(memo []int, n int) int {
+func helper4(memo []int, n int) int {
 	if n <= 2 {
 		return n
 	}
 
 	// Yet to be calculated
 	if memo[n] == 0 {
-		result := helper(memo, n-1) + helper(memo, n-2)
+		result := helper4(memo, n-1) + helper4(memo, n-2)
 		memo[n] = result
 		return result
 	}

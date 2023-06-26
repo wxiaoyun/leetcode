@@ -1,19 +1,8 @@
 package leetcode
 
-/**
- * Definition for singly-linked list.
- * type ListNode struct {
- *     Val int
- *     Next *ListNode
- * }
- */
+import "leetcode/ds"
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
-func swapPairs(head *ListNode) *ListNode {
+func swapPairs(head *ds.ListNode) *ds.ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}

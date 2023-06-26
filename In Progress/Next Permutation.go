@@ -1,4 +1,4 @@
-package leetcode
+package inprogress
 
 func nextPermutation(nums []int) {
 

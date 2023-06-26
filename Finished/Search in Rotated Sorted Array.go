@@ -1,7 +1,5 @@
 package leetcode
 
-import "fmt"
-
 func search(nums []int, target int) int {
 	pivot := findPivot(nums)
 

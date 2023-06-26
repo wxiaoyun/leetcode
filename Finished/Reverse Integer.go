@@ -26,9 +26,9 @@ import "math"
 func reverse(x int) int {
 	result := 0
 	if x < 0 {
-		result = -1 * helper(0, -x)
+		result = -1 * helper1(0, -x)
 	} else {
-		result = helper(0, x)
+		result = helper1(0, x)
 	}
 
 	if result < int(-math.Pow(2, 31)) || result > int(math.Pow(2, 31))-1 {
@@ -37,10 +37,10 @@ func reverse(x int) int {
 	return result
 }
 
-func helper(accum int, remaining int) int {
+func helper1(accum int, remaining int) int {
 	if remaining < 10 {
 		return accum*10 + remaining
 	}
 
-	return helper(accum*10+remaining%10, remaining/10)
+	return helper1(accum*10+remaining%10, remaining/10)
 }

@@ -1,13 +1,12 @@
 package leetcode
 
 import (
-	"fmt"
 	"math"
 )
 
 func generateMatrix(n int) [][]int {
 	output := make([][]int, n)
-	for i, _ := range output {
+	for i := range output {
 		output[i] = make([]int, n)
 	}
 
@@ -28,7 +27,6 @@ func generateMatrix(n int) [][]int {
 	currDir := rightwards
 	for count := 1; count <= int(math.Pow(float64(n), 2)); count++ {
 		output[index1][index2] = count
-		fmt.Printf("Curr Dir: %v, count: %v, r: %v, c: %v\n", currDir, count, index1, index2)
 
 		switch currDir {
 		case rightwards:
