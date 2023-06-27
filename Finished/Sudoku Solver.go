@@ -3,6 +3,7 @@ package leetcode
 // https://leetcode.com/problems/sudoku-solver/
 
 // var byteToNum = map[byte]int{
+// 	'0': 0,
 // 	'1': 1,
 // 	'2': 2,
 // 	'3': 3,
@@ -21,7 +22,6 @@ func numToByte(num int) byte {
 
 // returns the valid numbers that can be placed at the given row and col
 func getValidNums(board [][]byte, row, col int) []byte {
-	// array is 0 indexed, 0 is unused, so we put a '.' at index 0
 	validNums := []byte{'.'}
 
 	// 1-9 are valid
@@ -128,13 +128,10 @@ func solve(board [][]byte, row, col int) bool {
 		if num == '.' {
 			continue
 		}
-		// If the current number is valid, place it and move on to the next cell
-		if isValidMove(board, row, col, num) {
-			board[row][col] = num
-			// If we've solved the board, we're done
-			if solve(board, row, col+1) {
-				return true
-			}
+		board[row][col] = num
+		// If we've solved the board, we're done
+		if solve(board, row, col+1) {
+			return true
 		}
 	}
 	// If we've tried all valid numbers and none of them worked, backtrack
