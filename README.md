@@ -1,4 +1,4 @@
-# leetcode
+# Leetcode
 
 ## Finished And Submitted
 
