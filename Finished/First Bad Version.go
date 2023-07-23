@@ -34,7 +34,7 @@ package leetcode
 func firstBadVersion(n int) int {
 	left := 1
 	right := n
-	mid := left
+	var mid int
 
 	for left < right {
 		mid = (right + left) / 2

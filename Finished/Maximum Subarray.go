@@ -1,5 +1,7 @@
 package leetcode
 
+import "leetcode/util"
+
 // Given an integer array nums, find the
 // subarray
 //  with the largest sum, and return its sum.
@@ -30,16 +32,29 @@ package leetcode
 // https://leetcode.com/problems/maximum-subarray/
 
 func maxSubArray(nums []int) int {
-	// Kadane's algorithm
-	// https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm
-
 	max := nums[0]
 	current := nums[0]
 
 	for i := 1; i < len(nums); i++ {
-		current = maxInt(current+nums[i], nums[i])
-		max = maxInt(current, max)
+		// decide to whether continue building the subarray for start afresh
+		current = util.MaxInt(current+nums[i], nums[i])
+		max = util.MaxInt(max, current)
 	}
 
 	return max
 }
+
+// func maxSubArray(nums []int) int {
+// 	// Kadane's algorithm
+// 	// https://en.wikipedia.org/wiki/Maximum_subarray_problem#Kadane's_algorithm
+
+// 	max := nums[0]
+// 	current := nums[0]
+
+// 	for i := 1; i < len(nums); i++ {
+// 		current = util.MaxInt(current+nums[i], nums[i])
+// 		max = util.MaxInt(current, max)
+// 	}
+
+// 	return max
+// }

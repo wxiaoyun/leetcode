@@ -1,4 +1,4 @@
-package ds
+package util
 
 type Stack[T any] []T
 
