@@ -1,7 +1,5 @@
 package leetcode
 
-import "math"
-
 // Given the root of a binary tree, return the length of the diameter of the tree.
 
 // The diameter of a binary tree is the length of the longest path between any two nodes in a tree. This path may or may not pass through the root.
@@ -25,27 +23,18 @@ import "math"
 
 // https://leetcode.com/problems/diameter-of-binary-tree/
 
-/**
- * Definition for a binary tree node.
- */
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
-}
-
 func diameterOfBinaryTree(root *TreeNode) int {
-	diameter, _ := helper(root)
+	diameter, _ := helper8(root)
 	return diameter - 2
 }
 
-func helper(node *TreeNode) (diameter int, height int) {
+func helper8(node *TreeNode) (diameter int, height int) {
 	if node == nil {
 		return 0, 0
 	}
 
-	leftD, leftHeight := helper(node.Left)
-	rightD, rightHeight := helper(node.Right)
+	leftD, leftHeight := helper8(node.Left)
+	rightD, rightHeight := helper8(node.Right)
 	currD := leftHeight + rightHeight + 2
 
 	if leftD > diameter {

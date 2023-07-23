@@ -46,7 +46,7 @@ type MyQueue struct {
 	stack2 []int
 }
 
-func Constructor() MyQueue {
+func QueueConstructor() MyQueue {
 	return MyQueue{
 		ptr1:   0,
 		ptr2:   0,

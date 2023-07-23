@@ -1,12 +1,12 @@
 package leetcode
 
-import "leetcode/ds"
+import "leetcode/util"
 
 // https://leetcode.com/problems/sum-root-to-leaf-numbers/description/
 
-func sumNumbers(root *ds.TreeNode) int {
+func sumNumbers(root *util.TreeNode) int {
 	results := []int{}
-	helper(root, 0, &results)
+	helper7(root, 0, &results)
 	result := 0
 	for _, num := range results {
 		result += num
@@ -14,7 +14,7 @@ func sumNumbers(root *ds.TreeNode) int {
 	return result
 }
 
-func helper(node *ds.TreeNode, accum int, results *[]int) {
+func helper7(node *util.TreeNode, accum int, results *[]int) {
 	if node == nil {
 		return
 	}
@@ -23,11 +23,11 @@ func helper(node *ds.TreeNode, accum int, results *[]int) {
 		*results = append(*results, accum*10+node.Val)
 	}
 
-	helper(node.Left, accum*10+node.Val, results)
-	helper(node.Right, accum*10+node.Val, results)
+	helper7(node.Left, accum*10+node.Val, results)
+	helper7(node.Right, accum*10+node.Val, results)
 }
 
-func isLeaf(node *ds.TreeNode) bool {
+func isLeaf(node *util.TreeNode) bool {
 	if node == nil {
 		return false
 	}

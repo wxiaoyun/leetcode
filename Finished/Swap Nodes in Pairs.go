@@ -1,8 +1,8 @@
 package leetcode
 
-import "leetcode/ds"
+import "leetcode/util"
 
-func swapPairs(head *ds.ListNode) *ds.ListNode {
+func swapPairs(head *util.ListNode) *util.ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}

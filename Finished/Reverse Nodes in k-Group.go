@@ -1,8 +1,8 @@
 package leetcode
 
-import "leetcode/ds"
+import "leetcode/util"
 
-func reverseKGroup(head *ds.ListNode, k int) *ds.ListNode {
+func reverseKGroup(head *util.ListNode, k int) *util.ListNode {
 	// First check if the first k nodes are valid
 	cur := head
 	for i := 0; i < k; i++ {

@@ -1,6 +1,6 @@
 package leetcode
 
-import "leetcode/ds"
+import "leetcode/util"
 
 // Given the head of a singly linked list, reverse the list, and return the reversed list.
 
@@ -28,12 +28,12 @@ import "leetcode/ds"
 
 // Definition for singly-linked list.
 
-func reverseList(head *ds.ListNode) *ds.ListNode {
+func reverseList(head *util.ListNode) *util.ListNode {
 	if head == nil {
 		return head
 	}
 
-	var prev *ds.ListNode = nil
+	var prev *util.ListNode = nil
 	curr := head
 
 	for curr != nil {

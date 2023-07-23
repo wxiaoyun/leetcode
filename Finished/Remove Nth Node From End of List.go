@@ -1,8 +1,8 @@
 package leetcode
 
-import "leetcode/ds"
+import "leetcode/util"
 
-func removeNthFromEnd(head *ds.ListNode, n int) *ds.ListNode {
+func removeNthFromEnd(head *util.ListNode, n int) *util.ListNode {
 	if n == 0 {
 		return head
 	}
@@ -15,7 +15,7 @@ func removeNthFromEnd(head *ds.ListNode, n int) *ds.ListNode {
 	return head
 }
 
-func helper2(l *ds.ListNode, n int) int {
+func helper2(l *util.ListNode, n int) int {
 	if l == nil {
 		return 0
 	}

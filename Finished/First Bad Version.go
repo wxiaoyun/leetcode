@@ -47,3 +47,8 @@ func firstBadVersion(n int) int {
 	}
 	return right
 }
+
+// dummy func to avoid compile error
+func isBadVersion(int) bool {
+	return true
+}
