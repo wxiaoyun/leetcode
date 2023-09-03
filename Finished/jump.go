@@ -22,10 +22,10 @@ func jump(nums []int) int {
 	return dp[len(nums)-1]
 }
 
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-
-	return b
-}
+// func min(a, b int) int {
+// 	if a < b {
+// 		return a
+// 	}
+//
+// 	return b
+// }
