@@ -33,9 +33,9 @@ func helper(grid, dp [][]int, r, c int) int {
 	return dp[r][c]
 }
 
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
-}
+// func min(a, b int) int {
+// 	if a < b {
+// 		return a
+// 	}
+// 	return b
+// }
