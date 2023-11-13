@@ -19,7 +19,7 @@ var twoSum = function (nums, target) {
     if (wanted[`${difference}`] !== undefined) {
       return [wanted[`${difference}`], i];
     }
-
+    
     wanted[current] = i;
   }
 
