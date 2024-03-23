@@ -42,17 +42,20 @@ class TreeNode:
 
 class Solution:
     def isBalanced(self, root: Optional[TreeNode]) -> bool:
-        allIsBalanced = True
-        
-        def dfs(root: Optional[TreeNode]):
-            nonlocal allIsBalanced
-            if (not allIsBalanced): return -1
-            if (root is None): return 0
-            left, right = dfs(root.left), dfs(root.right)
-            if (left < 0 or right < 0 or abs(left - right) > 1): 
-                allIsBalanced = False
+        def helper(node):
+            if node == None:
+                return 0
+            
+            left_height = helper(node.left)
+            right_height = helper(node.right)
+
+            if left_height < 0 or right_height < 0:
                 return -1
-            return max(left, right) + 1
+            
+            if abs(left_height - right_height) > 1:
+                return -1
+            
+            return max(left_height, right_height) + 1
         
-        dfs(root)
-        return allIsBalanced
+        result = helper(root)
+        return False if result < 0 else True
