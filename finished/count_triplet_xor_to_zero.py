@@ -1,5 +1,8 @@
 # https://leetcode.com/problems/count-triplets-that-can-form-two-arrays-of-equal-xor/
 
+from typing import List
+
+
 class Solution:
     def countTriplets(self, arr: List[int]) -> int:
         prefix_xor = [0]

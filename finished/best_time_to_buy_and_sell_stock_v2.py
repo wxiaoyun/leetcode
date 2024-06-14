@@ -1,6 +1,7 @@
 # https://leetcode.com/problems/best-time-to-buy-and-sell-stock
 
 import math
+from typing import List
 
 
 class Solution:
