@@ -1,5 +1,9 @@
 # https://leetcode.com/problems/height-checker/
 
+import copy
+from typing import List
+
+
 class Solution:
     def heightChecker(self, heights: List[int]) -> int:
         expected = copy.deepcopy(heights)

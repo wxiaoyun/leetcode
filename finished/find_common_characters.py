@@ -1,5 +1,9 @@
 # https://leetcode.com/problems/find-common-characters/
 
+from collections import Counter, defaultdict
+from typing import List
+
+
 class Solution:
     def commonChars(self, words: List[str]) -> List[str]:
         cc = defaultdict(int)

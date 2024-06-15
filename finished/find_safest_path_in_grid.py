@@ -1,6 +1,8 @@
 # https://leetcode.com/problems/find-the-safest-path-in-a-grid/
 
+from collections import deque
 import heapq
+from typing import List
 
 class Solution:
     def maximumSafenessFactor(self, grid: List[List[int]]) -> int:
