@@ -1,5 +1,8 @@
 # https://leetcode.com/problems/longest-palindrome/
 
+from collections import Counter
+
+
 class Solution:
     def longestPalindrome(self, s: str) -> int:
         # def expand(i: int, j: int) -> int:

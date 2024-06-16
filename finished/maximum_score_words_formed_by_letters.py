@@ -1,5 +1,9 @@
 # https://leetcode.com/problems/maximum-score-words-formed-by-letters/
 
+from collections import defaultdict
+from typing import List, Tuple
+
+
 class Solution:
     def maxScoreWords(self, words: List[str], letters: List[str], score: List[int]) -> int:
         char_freq = defaultdict(int)

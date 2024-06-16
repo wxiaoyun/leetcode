@@ -1,5 +1,8 @@
 # https://leetcode.com/problems/maximize-happiness-of-selected-children/
 
+from typing import List
+
+
 class Solution:
     def maximumHappinessSum(self, happiness: List[int], k: int) -> int:
         happiness.sort(key=lambda h:-h)

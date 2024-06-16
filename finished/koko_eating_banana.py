@@ -1,4 +1,7 @@
 # https://leetcode.com/problems/koko-eating-bananas/
+from typing import List
+
+
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
         def time_needed(k: int) -> int:
