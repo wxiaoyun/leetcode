@@ -1,5 +1,9 @@
 # https://leetcode.com/problems/word-break-ii/
 
+import copy
+from typing import List
+
+
 class Trie:
     def __init__(self, strs: List[str] = None):
         self.children = [None for i in range(26)]
