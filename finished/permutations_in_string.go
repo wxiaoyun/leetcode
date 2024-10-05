@@ -1,5 +1,7 @@
 package leetcode
 
+// https://leetcode.com/problems/permutation-in-string/
+
 func checkInclusion(s1 string, s2 string) bool {
 	s1Map := make([]int, 26)
 	for _, c := range s1 {
