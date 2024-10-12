@@ -1,22 +1,41 @@
+# https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-string-balanced/
+
 class Solution:
     def minSwaps(self, s: str) -> int:
-        stack = []
-        count = 0
+        bcount = 0
+        swaps = 0
 
-        for b in s:
-          if b == "[":
-            stack.append(b)
-            continue
-          
-          if not stack:
-            count += 1
+        for c in s:
+          if c == '[':
+            bcount += 1
           else:
-            stack.pop()
-
-        if stack:
-          count += 1
+            if bcount == 0:
+              bcount += 1
+              swaps += 1
+            else:
+              bcount -= 1
         
-        return count // 2
+        return swaps
+
+# class Solution:
+#     def minSwaps(self, s: str) -> int:
+#         stack = []
+#         count = 0
+
+#         for b in s:
+#           if b == "[":
+#             stack.append(b)
+#             continue
+          
+#           if not stack:
+#             count += 1
+#           else:
+#             stack.pop()
+
+#         if stack:
+#           count += 1
+        
+#         return count // 2
 
 
 # class Solution:

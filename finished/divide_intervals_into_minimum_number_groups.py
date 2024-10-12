@@ -1,6 +1,7 @@
 import heapq
 from typing import List
 
+# https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/
 
 class Solution:
     def minGroups(self, intervals: List[List[int]]) -> int:
