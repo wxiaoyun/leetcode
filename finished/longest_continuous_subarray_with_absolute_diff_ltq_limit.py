@@ -6,6 +6,33 @@ from typing import List
 
 class Solution:
     def longestSubarray(self, nums: List[int], limit: int) -> int:
+        maxq = deque() # monotonically non-increasing, so largest element at the start
+        minq = deque() # monotonically non-decreasing, so smallest element at the start
+
+        best = 0
+        left = 0
+        for right, n in enumerate(nums):
+          while maxq and maxq[-1] > n:
+            maxq.pop()
+          maxq.append(n)
+          while minq and minq[-1] < n:
+            minq.pop()
+          minq.append(n)
+          
+          lo, hi = minq[0], maxq[0]
+          while abs(minq[0] - maxq[0]) > limit:
+            if nums[left] == minq[0]:
+              minq.popleft()
+            if nums[left] == maxq[0]:
+              maxq.popleft()
+            left += 1
+          
+          best = max(best, right - left+1)
+        return best
+
+
+class Solution:
+    def longestSubarray(self, nums: List[int], limit: int) -> int:
       # monotonically increasing deque that contains elements up to the r^th element, in order
       minq = deque() # [small to big between l and r]
       # monotonically decreasing deque that contains elements up to the r^th element, in order
