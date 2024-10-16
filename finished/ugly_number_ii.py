@@ -1,4 +1,20 @@
+import heapq
+
 # https://leetcode.com/problems/ugly-number-ii
+
+class Solution:
+    def nthUglyNumber(self, n: int) -> int:
+      pq = [1]
+      seen = set([1])
+      for i in range(n-1):
+        ugly = heapq.heappop(pq)
+        # print(ugly)
+        for u in [2, 3, 5]:
+          new_ugly = ugly * u
+          if new_ugly not in seen:
+            heapq.heappush(pq, ugly * u)
+            seen.add(new_ugly)
+      return heapq.heappop(pq)
 
 class Solution:
     def nthUglyNumber(self, n: int) -> int:
