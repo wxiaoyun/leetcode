@@ -1,5 +1,5 @@
 import heapq
-from typing import Optional, Tuple
+from typing import List, Optional, Tuple
 
 # https://leetcode.com/problems/longest-happy-string/
 
@@ -18,8 +18,11 @@ from typing import Optional, Tuple
 
 class Solution:
     def longestDiverseString(self, a: int, b: int, c: int) -> str:
-        k = 2
-        pq = [(-a, "a"), (-b, "b"), (-c, "c")]
+        return self.generalize_solution([("a", a), ("b", b), ("c", c)], 2)
+
+    def generalize_solution(self, chars: List[Tuple[str, int]], maxRepeatLen: int):
+        k = maxRepeatLen
+        pq = [(-f, c) for c, f in chars]
         heapq.heapify(pq)
 
         res = []
