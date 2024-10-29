@@ -22,9 +22,6 @@ class Solution:
             if i < r-1 and moves[i+1] > 0 and cur > grid[i+1][j-1]:
               tmp[i] = max(tmp[i], moves[i+1] + 1)
             best = max(best, tmp[i]-1)
-            # print(best)
-
           moves = tmp
-          # print(j, moves)
         
         return best
