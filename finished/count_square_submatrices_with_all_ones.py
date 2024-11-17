@@ -5,6 +5,21 @@ from typing import List
 
 class Solution:
     def countSquares(self, matrix: List[List[int]]) -> int:
+        max_square = copy.deepcopy(matrix)
+
+        for r in range(1, len(matrix)):
+          for c in range(1, len(matrix[0])):
+            if matrix[r][c]:
+              max_square[r][c] = min(
+                max_square[r-1][c-1],
+                max_square[r-1][c],
+                max_square[r][c-1],
+              ) + 1
+
+        return sum([sum(row) for row in max_square])
+
+class Solution:
+    def countSquares(self, matrix: List[List[int]]) -> int:
         r = len(matrix)
         c = len(matrix[0])
 
