@@ -4,6 +4,29 @@ from typing import List
 
 class Solution:
     def minimumMountainRemovals(self, nums: List[int]) -> int:
+        N = len(nums)
+
+        # find the maximum strictly increasing subsequence
+        inc = [0] * N
+        for r in range(N):
+          for l in range(r):
+            if nums[l] < nums[r]:
+              inc[r] = max(inc[r], inc[l] + 1)
+
+        # find the maximum strictly decreasing subsequence
+        dec = [0] * N
+        for l in reversed(range(N)):
+          for r in range(l+1, N):
+            if nums[l] > nums[r]:
+              dec[l] = max(dec[l], dec[r] + 1)
+        
+        best = float('inf')
+        for i in range(1, N-1):
+          if inc[i] > 0 and dec[i] > 0:
+            best = min(best, N - inc[i] - dec[i] - 1)
+        return best
+  
+    def minimumMountainRemovals(self, nums: List[int]) -> int:
         n = len(nums)
         ltr_lis = [1] * n
         rtl_lis = [1] * n
