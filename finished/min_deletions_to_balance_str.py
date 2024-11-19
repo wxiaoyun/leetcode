@@ -5,6 +5,29 @@ from typing import List
 
 class Solution:
     def minimumDeletions(self, s: str) -> int:
+      N = len(s)
+      pb_cnt = [0] * N
+      sa_cnt = [0] * N
+
+      for i in range(N):
+        if s[i] == 'b':
+          pb_cnt[i] += 1
+        if i > 0:
+          pb_cnt[i] += pb_cnt[i-1]
+        
+        j = N-1-i
+        if s[j] == 'a':
+          sa_cnt[j] += 1
+        if j < N-1:
+          sa_cnt[j] += sa_cnt[j+1]
+      
+      best = min(pb_cnt[-1], sa_cnt[0]) # consider changing the entire all to 'b's and 'a's
+      for i in range(N-1):
+        best = min(best, pb_cnt[i]+sa_cnt[i+1])
+
+      return best
+  
+    def minimumDeletions(self, s: str) -> int:
         tmp = 0
 
         # prefix sum of number of 'b's
