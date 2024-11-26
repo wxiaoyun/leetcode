@@ -8,11 +8,11 @@ class Solution:
         for src, dst in edges:
           pcnt[dst] += 1
         
-        champ = None
+        champ = -1
         for k, v in pcnt.items():
           if v == 0:
-            if champ != None:
+            if champ >= 0:
               return -1
             else:
               champ = k
-        return champ if champ != None else -1
+        return champ if champ >= 0 else -1
