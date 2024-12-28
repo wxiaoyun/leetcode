@@ -5,9 +5,6 @@ from typing import Dict, List, Tuple
 class Solution:
     def maxSumOfThreeSubarrays(self, nums: List[int], k: int) -> List[int]:
         N = len(nums)
-        dp1 = {}
-        dp2 = {}
-        dp3 = {}
 
         prefix_sum = [0]
         for i in range(N):
