@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict, List, Tuple
 
 # https://leetcode.com/problems/maximum-sum-of-3-non-overlapping-subarrays/
 
@@ -11,61 +11,42 @@ class Solution:
 
         prefix_sum = [0]
         for i in range(N):
-          prefix_sum.append(nums[i] + prefix_sum[-1])
-        
+            prefix_sum.append(nums[i] + prefix_sum[-1])
+
         # array sum from i to j exclusive: [i, j)
-        def subarr_sum(i, j):
-          return prefix_sum[j] - prefix_sum[i]
+        def subarr_sum(i: int, k: int) -> int:
+            return prefix_sum[i + k] - prefix_sum[i]
 
-        for i in reversed(range(N-k+1)):
-          s = subarr_sum(i, i + k)
-          ls = [i]
-          if i+1 in dp1:
-            ps, pls = dp1[i+1]
-            if ps > s:
-              s = ps
-              ls = pls
+        def compute(times: int, prev: Dict[int, Tuple[int, list]] = None):
+            if times == 0:
+                return prev
 
-          dp1[i] = (s, ls)
+            if not prev:
+                prev = {i: (0, []) for i in range(N + k + 1)}
 
-        for i in reversed(range(N-k+1)):
-          prev = i + k
-          if prev not in dp1:
-            continue
+            dp: Dict[int, Tuple[int, list]] = {}
+            for i in reversed(range(N - k + 1)):
+                prev_idx = i + k
+                if prev_idx not in prev:
+                    continue
 
-          ps, pls = dp1[i + k]
-          s = ps
-          s += subarr_sum(i, i + k)
-          ls = pls[:]
-          ls.append(i)
+                ps, pls = prev[i + k]
+                s = ps
+                s += subarr_sum(i, k)
+                ls = pls[:]
+                ls.append(i)
 
-          if i+1 in dp2:
-            ps, pls = dp2[i+1]
-            if ps > s:
-              s = ps
-              ls = pls
-          
-          dp2[i] = (s, ls)
-        
-        for i in reversed(range(N-k+1)):
-          prev = i + k
-          if prev not in dp2:
-            continue
+                if i + 1 in dp:
+                    ps, pls = dp[i + 1]
+                    if ps > s:
+                        s = ps
+                        ls = pls
 
-          ps, pls = dp2[i + k]
-          s = ps
-          s += subarr_sum(i, i + k)
-          ls = pls[:]
-          ls.append(i)
+                dp[i] = (s, ls)
 
-          if i+1 in dp3:
-            ps, pls = dp3[i+1]
-            if ps > s:
-              s = ps
-              ls = pls
-          
-          dp3[i] = (s, ls)
-        
-        res = dp3[0][1]
+            return compute(times - 1, dp)
+
+        res = compute(3)
+        res = res[0][1]
         res.reverse()
         return res
