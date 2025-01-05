@@ -6,6 +6,24 @@ from typing import List
 class Solution:
     # Time: O(max(n, m))
     def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
+      jobs = [0 for _ in range(len(s)+1)]
+      for start, end, d in shifts:
+        delta = d if d > 0 else -1
+        jobs[start] += delta
+        jobs[end+1] -= delta
+
+      res = []
+      delta = 0
+      for i, ch in enumerate(s):
+        delta += jobs[i]
+        
+        ch_int = (ord(ch) - ord('a') + delta) % 26 + ord('a')
+        res.append(chr(ch_int))
+
+      return "".join(res)
+  
+    # Time: O(max(n, m))
+    def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
         jobs = [[] for _ in range(len(s) + 1)]
         for start, end, d in shifts:
             delta = d if d > 0 else -1
