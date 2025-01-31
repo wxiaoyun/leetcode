@@ -9,23 +9,27 @@ class UF:
     
     def union(self, a: int, b: int) -> None:
         ap = self.find(a)
-        ar = self.rank[ap]
         bp = self.find(b)
+        if ap == bp:
+          return None
+        
+        ar = self.rank[ap]
         br = self.rank[bp]
 
         if ar < br:
             self.parent[ap] = bp
-            self.rank[ap] += br
+        elif ar > br:
+            self.parent[bp] = ap
         else:
             self.parent[bp] = ap
-            self.rank[bp] += ar
+            self.rank[ap] += 1
 
         return None
     
     def find(self, a: int) -> int:
         if a not in self.parent:
             self.parent[a] = a
-            self.rank[a] = 1
+            self.rank[a] = 0
 
         p = self.parent[a]
         if p == a:
