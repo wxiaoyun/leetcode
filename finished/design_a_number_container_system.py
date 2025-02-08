@@ -1,3 +1,8 @@
+from collections import defaultdict
+import heapq
+
+# https://leetcode.com/problems/design-a-number-container-system/
+
 # For a given number, lookup the smallest index.
 # The challenge here is that the smallest index may change when we perform a change operation
 # and the changed number was the smallest index.
@@ -9,11 +14,6 @@
 # If the workload is write heavy, the optimal approach will be using a hashmap to keep
 # track of the number at each index. Writes will be O(1), but reads will cost O(n) where
 # a full scan of the hashmap is required.
-
-
-from collections import defaultdict
-import heapq
-
 
 class NumberContainers:
     def __init__(self):
