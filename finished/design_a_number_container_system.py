@@ -15,6 +15,54 @@ import heapq
 # track of the number at each index. Writes will be O(1), but reads will cost O(n) where
 # a full scan of the hashmap is required.
 
+# Lazier, only mark as dirty when min number is deleted
+class NumberContainers:
+    def __init__(self):
+        self.index2num = {}
+        self.num_pq = {}
+
+    def change(self, index: int, number: int) -> None:
+        if index in self.index2num:
+            n = self.index2num[index]
+            self.delete(index, n)
+        self.index2num[index] = number
+        
+        if number not in self.num_pq:
+            self.num_pq[number] = {
+                "dirty": False,
+                "set": set(),
+                "min": float('inf')
+            }
+        
+        ds = self.num_pq[number]
+        ds["set"].add(index)
+        ds["min"] = min(ds["min"], index)
+        # print(f"CHANGE i: {index}, n: {number}")
+        # print(self.index2num)
+        # print(self.num_pq)
+        
+    def find(self, number: int) -> int:
+        if number not in self.num_pq:
+            return -1
+        
+        ds = self.num_pq[number]
+        if len(ds["set"]) == 0:
+            return -1
+        
+        if ds["dirty"]:
+            ds["min"] = min(ds["set"])
+            ds["dirty"] = False
+        
+        return ds["min"]
+
+    def delete(self, index: int, number: int) -> None:
+        ds = self.num_pq[number]
+        ds["set"].remove(index)
+        if ds["min"] == index:
+            ds["min"] = float('inf')
+            ds["dirty"] = True
+
+# Lazy find
 class NumberContainers:
     def __init__(self):
         self.index2num = {}
