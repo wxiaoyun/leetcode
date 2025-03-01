@@ -3,12 +3,14 @@ from typing import Optional
 
 #  https://leetcode.com/problems/recover-a-tree-from-preorder-traversal
 
- # Definition for a binary tree node.
+
+# Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
         self.left = left
         self.right = right
+
 
 class Solution:
     def recoverFromPreorder(self, traversal: str) -> Optional[TreeNode]:
@@ -26,17 +28,17 @@ class Solution:
                 depth = i
                 num = int(part[i:])
                 break
-            
+
             if depth == 0:
                 stack.append((depth, TreeNode(num)))
                 continue
-            
+
             prev_depth, _ = stack[-1]
             pops = prev_depth - depth + 1
 
             for _ in range(pops):
                 stack.pop()
-            
+
             node = TreeNode(num)
             _, pnode = stack[-1]
             if not pnode.left:
@@ -46,6 +48,3 @@ class Solution:
             stack.append((depth, node))
 
         return stack[0][1]
-
-
-            
