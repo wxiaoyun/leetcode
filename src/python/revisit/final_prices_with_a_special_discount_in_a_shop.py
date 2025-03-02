@@ -1,3 +1,4 @@
+import heapq
 from typing import List
 
 # https://leetcode.com/problems/final-prices-with-a-special-discount-in-a-shop/
@@ -12,3 +13,22 @@ class Solution:
         stack.append(i)
 
       return prices
+  
+  class Solution:
+    def finalPrices(self, prices: List[int]) -> List[int]:
+        pq = []
+
+        for i, p in enumerate(prices):
+            while pq:
+                px, j = pq[0]
+                px = -px
+
+                if px < p:
+                    break
+
+                prices[j] -= p
+                heapq.heappop(pq)
+            
+            heapq.heappush(pq, (-p, i))
+
+        return prices
