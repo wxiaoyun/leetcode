@@ -16,22 +16,17 @@ class Solution:
             while cur <= right:
                 not_prime[cur] = True
                 cur += n
-        
-        # print(list(enumerate(not_prime)))
 
         best = float('inf')
         pair = [-1, -1]
         l = None
         for r in range(left, right + 1):
-            # print(l, r)
             if not_prime[r]:
                 continue
             
             if not l:
                 l = r
                 continue
-
-            # print("PRIME", r)
             
             if r - l < best:
                 pair = [l, r]
