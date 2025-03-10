@@ -21,7 +21,6 @@ class Solution:
             if ch in vcnt:
                 vcnt[ch] += 1
             else:
-                cq.append(r)
                 ccnt += 1
 
             while ccnt > k:
