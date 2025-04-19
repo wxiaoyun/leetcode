@@ -20,6 +20,32 @@ class Solution:
 
 class Solution:
     def countFairPairs(self, nums: List[int], lower: int, upper: int) -> int:
+        N = len(nums)
+        nums = sorted(nums)
+
+        def count_fair(j: int, target: int) -> int:
+            t = target - nums[j]
+            res, low, high = -1, 0, j
+
+            while low < high:
+                mid = low + (high - low) // 2
+
+                if nums[mid] <= t:
+                    low = mid + 1
+                    res = mid
+                else:
+                    high = mid
+
+            return res
+
+        pairs = 0
+        for j in range(N):
+            pairs += count_fair(j, upper) - count_fair(j, lower - 1)
+        return pairs
+
+
+class Solution:
+    def countFairPairs(self, nums: List[int], lower: int, upper: int) -> int:
         arr = sorted(nums)
         N = len(arr)
 
@@ -33,7 +59,6 @@ class Solution:
                     r = m
             return l
 
-        # print(arr)
         pairs = 0
         for i in range(N - 1):
             cur = arr[i]
