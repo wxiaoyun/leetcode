@@ -1,6 +1,21 @@
+import bisect
 from typing import List
 
 # https://leetcode.com/problems/count-the-number-of-fair-pairs/
+
+
+class Solution:
+    def countFairPairs(self, nums: List[int], lower: int, upper: int) -> int:
+        N = len(nums)
+        nums = sorted(nums)
+
+        def count_fair(j: int, target: int) -> int:
+            return bisect.bisect_right(nums, target - nums[j], hi=j)
+
+        pairs = 0
+        for j in range(N):
+            pairs += count_fair(j, upper) - count_fair(j, lower - 1)
+        return pairs
 
 
 class Solution:
