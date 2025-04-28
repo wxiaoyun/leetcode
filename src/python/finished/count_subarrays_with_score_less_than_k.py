@@ -3,6 +3,23 @@ from typing import List
 # https://leetcode.com/problems/count-subarrays-with-score-less-than-k
 
 
+# O(n)
+class Solution:
+    def countSubarrays(self, nums: List[int], k: int) -> int:
+        l = 0
+        count, sm = 0, 0
+
+        for r, n in enumerate(nums):
+            sm += n
+            while sm * (r - l + 1) >= k:
+                sm -= nums[l]
+                l += 1
+            count += r - l + 1
+
+        return count
+
+
+# O(nlogn)
 class Solution:
     def countSubarrays(self, nums: List[int], k: int) -> int:
         N = len(nums)
