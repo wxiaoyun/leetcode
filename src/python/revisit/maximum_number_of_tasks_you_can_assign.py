@@ -46,7 +46,6 @@ class Solution:
         res = 0
         while l < r:
             m = l + (r - l) // 2
-            print(l, m, r)
             if can_complete(tasks, workers, pills, strength, m):
                 res = m
                 l = m + 1
