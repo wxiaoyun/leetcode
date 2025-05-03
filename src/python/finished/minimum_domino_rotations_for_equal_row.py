@@ -22,12 +22,11 @@ class Solution:
             if bit != "1":
                 continue
 
-            target = int(bit) << digit
             count_top, count_bottom = 0, 0
             for i in range(N):
-                if (1 << tops[i]) != target:
+                if tops[i] != digit:
                     count_top += 1
-                if (1 << bottoms[i]) != target:
+                if bottoms[i] != digit:
                     count_bottom += 1
 
             best = min(best, count_top, count_bottom)
