@@ -2,6 +2,8 @@
 
 using namespace std;
 
+// https://leetcode.com/problems/three-consecutive-odds
+
 class Solution {
  public:
   bool threeConsecutiveOdds(vector<int>& arr) {

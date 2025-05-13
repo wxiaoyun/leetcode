@@ -2,6 +2,8 @@
 
 using namespace std;
 
+// https://leetcode.com/problems/minimum-equal-sum-of-two-arrays-after-replacing-zeros
+
 class Solution {
  public:
   long long minSum(vector<int>& nums1, vector<int>& nums2) {
