@@ -9,7 +9,6 @@ class Solution {
   bool isZeroArray(vector<int>& nums, vector<vector<int>>& queries) {
     int n = nums.size();
     auto prefix_delta = vector<int>(n + 1, 0);
-    int qs = queries.size();
     for (const auto& q : queries) {
       prefix_delta[q[0]] -= 1;
       prefix_delta[q[1] + 1] += 1;
