@@ -1,5 +1,4 @@
 from typing import List
-from collections import defaultdict
 
 
 # https://leetcode.com/problems/maximize-the-number-of-target-nodes-after-connecting-trees-i
@@ -9,29 +8,24 @@ class Solution:
     def maxTargetNodes(
         self, edges1: List[List[int]], edges2: List[List[int]], k: int
     ) -> List[int]:
-        adj_list1 = defaultdict(list)
-        adj_list2 = defaultdict(list)
-
-        N = 0
+        N = len(edges1) + 1
+        adj_list1 = [[] for _ in range(N)]
         for u, v in edges1:
-            N = max(N, u, v)
             adj_list1[u].append(v)
             adj_list1[v].append(u)
-        N += 1
 
-        M = 0
+        M = len(edges2) + 1
+        adj_list2 = [[] for _ in range(M)]
         for u, v in edges2:
-            M = max(M, u, v)
             adj_list2[u].append(v)
             adj_list2[v].append(u)
-        M += 1
 
         # calculate k target for each node in tree 1
         # calculate (k-1) target for each node in tree 2
         def dfs(
-            adj_list: dict,
+            adj_list: List[List[int]],
             target: int,
-            dp: dict,
+            dp: List[int],
             src: int,
             cur: int,
             par: int,
@@ -47,15 +41,14 @@ class Solution:
                     continue
                 dfs(adj_list, target, dp, src, nb, cur, depth + 1)
 
-        t1_dp = defaultdict(int)
+        t1_dp = [0] * N
         for n in range(N):
             dfs(adj_list1, k, t1_dp, n, n, -1, 0)
 
-        t2_dp = defaultdict(int)
+        t2_dp = [0] * M
         for m in range(M):
             dfs(adj_list2, k - 1, t2_dp, m, m, -1, 0)
-
-        t2_best = max(t2_dp.values()) if len(t2_dp) else 0
+        t2_best = max(t2_dp) if len(t2_dp) else 0
 
         ans = [0] * N
         for n in range(N):
