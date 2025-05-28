@@ -39,6 +39,8 @@ class Solution:
         ) -> None:
             if depth <= target:
                 dp[src] += 1
+            else:
+                return
 
             for nb in adj_list[cur]:
                 if nb == par:
