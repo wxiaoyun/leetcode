@@ -6,29 +6,22 @@ from typing import List
 class Solution:
     def closestMeetingNode(self, edges: List[int], node1: int, node2: int) -> int:
         N = len(edges)
-        adj_list = [[] for _ in range(N)]
-        for u, v in enumerate(edges):
-            if v < 0:
-                continue
-            adj_list[u].append(v)
 
-        def dfs(
-            adj_list: List[List[int]], dist: List[int], n: int, depth: int = 0
-        ) -> None:
+        def dfs(edges: List[int], dist: List[int], n: int, depth: int = 0) -> None:
             if depth >= dist[n]:
                 return None
             dist[n] = depth
 
-            for nb in adj_list[n]:
-                dfs(adj_list, dist, nb, depth + 1)
-            return None
+            if edges[n] < 0:
+                return None
+            return dfs(edges, dist, edges[n], depth + 1)
 
         MAX = 1 << 32 - 1
         dist1 = [MAX] * N
-        dfs(adj_list, dist1, node1)
+        dfs(edges, dist1, node1)
 
         dist2 = [MAX] * N
-        dfs(adj_list, dist2, node2)
+        dfs(edges, dist2, node2)
 
         best, best_idx = MAX, -1
         for n in range(N):
