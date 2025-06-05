@@ -45,8 +45,9 @@ class Solution:
             uf.union(a, b)
 
         smallest = list(range(26))  # by classification
-        for i, cat in enumerate(uf.parent):
-            smallest[cat] = min(smallest[cat], i)
+        for i in range(26):
+            p = uf.find(i)
+            smallest[p] = min(smallest[p], i)
 
         def get_smallest(ch: str) -> str:
             i = ordd(ch)
