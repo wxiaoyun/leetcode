@@ -24,7 +24,4 @@ class Solution:
             while t and (i == N - 1 or (t[-1] <= s[pos_min[i + 1]])):
                 p.append(t.pop())
 
-        while t:
-            p.append(t.pop())
-
         return "".join(p)
