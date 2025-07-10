@@ -36,5 +36,6 @@ class Solution:
             for slack, j in top_slacks:
                 if slack >= duration and j != i and j != i + 1:
                     best = max(best, slack_sum + duration)
+                    break
 
         return best
