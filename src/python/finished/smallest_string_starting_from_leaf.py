@@ -35,3 +35,27 @@ class Solution:
 
         dfs(root)
         return best or ""
+
+
+class Solution:
+    def smallestFromLeaf(self, root: Optional[TreeNode]) -> str:
+        def dfs(node: Optional[TreeNode], chrs: List[str] = []) -> str:
+            if node is None:
+                return None
+            chrs.append(chr(node.val + ord("a")))
+
+            if node.left is None and node.right is None:
+                res = "".join(reversed(chrs))
+                chrs.pop()
+                return res
+
+            left_str = dfs(node.left, chrs)
+            right_str = dfs(node.right, chrs)
+            chrs.pop()
+
+            if left_str is None or right_str is None:
+                return left_str or right_str
+
+            return left_str if left_str < right_str else right_str
+
+        return dfs(root)
