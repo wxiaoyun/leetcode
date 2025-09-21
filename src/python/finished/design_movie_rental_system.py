@@ -1,7 +1,59 @@
-import heapq
 from typing import List, Optional, Tuple
+import heapq
+from collections import defaultdict
+from sortedcontainers import SortedList
 
 # https://leetcode.com/problems/design-movie-rental-system/
+
+
+class MovieRentingSystem:
+
+    def __init__(self, n: int, entries: List[List[int]]):
+        # Dict<(shop_id, movie_id), price>
+        price_dict = {}
+        # unrented movies grouped by movie_id. Each sorted by price, then shop_id
+        unrented_movies = defaultdict(SortedList)
+        # rented movies sorted by price, then shop_id, lastly movie_id
+        rented_movies = SortedList()
+
+        for shop_id, movie_id, price in entries:
+            price_dict[(shop_id, movie_id)] = price
+            unrented_movies[movie_id].add((price, shop_id))
+
+        self.price_dict = price_dict
+        self.unrented_movies = unrented_movies
+        self.rented_movies = rented_movies
+        return None
+
+    def search(self, movie: int) -> List[int]:
+        cheapest_shops = self.unrented_movies[movie][:5]
+        return [shop_id for _, shop_id in cheapest_shops]
+
+    def rent(self, shop: int, movie: int) -> None:
+        price = self.price_dict[(shop, movie)]
+
+        # remove from unrented to rented
+        self.unrented_movies[movie].remove((price, shop))
+        self.rented_movies.add((price, shop, movie))
+
+    def drop(self, shop: int, movie: int) -> None:
+        price = self.price_dict[(shop, movie)]
+
+        # move from rented to unrented
+        self.rented_movies.remove((price, shop, movie))
+        self.unrented_movies[movie].add((price, shop))
+
+    def report(self) -> List[List[int]]:
+        cheapest_movies = self.rented_movies[:5]
+        return [(shop_id, movie_id) for _, shop_id, movie_id in cheapest_movies]
+
+
+# Your MovieRentingSystem object will be instantiated and called as such:
+# obj = MovieRentingSystem(n, entries)
+# param_1 = obj.search(movie)
+# obj.rent(shop,movie)
+# obj.drop(shop,movie)
+# param_4 = obj.report()
 
 
 # TLE
