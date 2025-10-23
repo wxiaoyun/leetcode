@@ -1,6 +1,6 @@
 impl Solution {
     pub fn has_same_digits(s: String) -> bool {
-        let mut digits: Vec<_> = s.chars().map(|ch| ch as u8).collect();
+        let mut digits: Vec<_> = s.chars().map(|ch| ch.to_digit(10).unwrap()).collect();
         let mut bound = digits.len() - 1;
 
         while bound >= 2 {
