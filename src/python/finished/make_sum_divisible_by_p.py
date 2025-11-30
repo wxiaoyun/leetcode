@@ -2,6 +2,27 @@ from typing import List
 
 # https://leetcode.com/problems/make-sum-divisible-by-p/
 
+
+class Solution:
+    def minSubarray(self, nums: List[int], p: int) -> int:
+        clas = sum(nums) % p
+        if clas == 0:
+            return 0
+
+        prev_mod_idx = {}
+        prev_mod_idx[0] = -1
+        cur = 0
+        best = len(nums)
+        for i, n in enumerate(nums):
+            cur = (cur + n) % p
+            need = (cur - clas) % p
+
+            if need in prev_mod_idx:
+                best = min(best, i - prev_mod_idx[need])
+
+            prev_mod_idx[cur] = i
+        return best if best < len(nums) else -1
+
 # Intuition
 # Essentially, we are trying to find i, j such that:
 # (total - prefix_sum[j] + prefix_sum[i]) % p = 0
