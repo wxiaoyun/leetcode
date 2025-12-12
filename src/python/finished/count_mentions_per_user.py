@@ -2,6 +2,8 @@ import heapq
 
 from typings import List
 
+# https://leetcode.com/problems/count-mentions-per-user/
+
 
 class Solution:
     def countMentions(self, numberOfUsers: int, events: List[List[str]]) -> List[int]:
