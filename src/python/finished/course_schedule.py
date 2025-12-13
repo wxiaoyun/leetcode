@@ -11,7 +11,7 @@ class Solution:
 
         def can_finish(course: int) -> bool:
             # can_finish(course) iff
-            # for all course' in prerequisites[course], can_finish(course)
+            # for all course' in prerequisites[course], can_finish(course')
 
             if course in dp:
                 return dp[course]
