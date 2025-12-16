@@ -5,6 +5,27 @@ from typing import Dict, List, Tuple
 
 class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
+        def compute(dp: dict, nums: int, i: int, target: int) -> int:
+            if i >= len(nums):
+                if target == 0:
+                    return 1
+                return 0
+
+            key = (i, target)
+            if key in dp:
+                return dp[key]
+
+            ways = 0
+            for n in [nums[i], -nums[i]]:
+                ways += compute(dp, nums, i + 1, target - n)
+            dp[key] = ways
+            return ways
+
+        return compute({}, nums, 0, target)
+
+
+class Solution:
+    def findTargetSumWays(self, nums: List[int], target: int) -> int:
         dp: Dict[Tuple[int, int], int] = {}
 
         def find(cur: int, idx: int) -> int:
