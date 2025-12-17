@@ -1,37 +1,39 @@
-# You are given an array prices where prices[i] is the price of a given stock on the ith day.
-
-# You want to maximize your profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
-
-# Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0.
-
- 
-
-# Example 1:
-
-# Input: prices = [7,1,5,3,6,4]
-# Output: 5
-# Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
-# Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
-# Example 2:
-
-# Input: prices = [7,6,4,3,1]
-# Output: 0
-# Explanation: In this case, no transactions are done and the max profit = 0.
- 
-
-# Constraints:
-
-# 1 <= prices.length <= 105
-# 0 <= prices[i] <= 104
-
-# https://leetcode.com/problems/valid-palindrome/
-
+import math
 from typing import List
+
+# https://leetcode.com/problems/best-time-to-buy-and-sell-stock
+
+
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        # prefix_min = [math.inf] * len(prices)
+        # prefix_min[0] = prices[0]
+        # postfix_max = [-math.inf] * len(prices)
+        # postfix_max[-1] = prices[-1]
+
+        # for i in range(1, len(prices)):
+        #     prefix_min[i] = min(prefix_min[i-1], prices[i])
+        #     postfix_max[-i-1] = max(postfix_max[-i], prices[-i-1])
+
+        # cur = -math.inf
+        # for i in range(len(prices)):
+        #     cur = max(cur, postfix_max[i] - prefix_min[i])
+
+        # return cur
+        min_price_seen = math.inf
+        cur_max = 0
+
+        for p in prices:
+            min_price_seen = min(min_price_seen, p)
+            cur_max = max(cur_max, p - min_price_seen)
+
+        return cur_max
+
 
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
         # Base case
-        if (len(prices) <= 1):
+        if len(prices) <= 1:
             return 0
 
         # preprocess the maximum element reading from the right
@@ -41,7 +43,7 @@ class Solution:
 
         for i in range(1, len(prices)):
             j = len(prices) - 1 - i
-            if (prices[j] > max[j + 1]):
+            if prices[j] > max[j + 1]:
                 max[j] = prices[j]
             else:
                 max[j] = max[j + 1]
@@ -50,8 +52,8 @@ class Solution:
         maxProfit = 0
         for i in range(0, len(prices)):
             profit = max[i] - prices[i]
-            if (profit < 0):
-                continue # no profit
-            elif (profit > maxProfit):
+            if profit < 0:
+                continue  # no profit
+            elif profit > maxProfit:
                 maxProfit = profit
         return maxProfit
