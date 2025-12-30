@@ -1,6 +1,33 @@
 from typing import List
 
 
+class Solution:
+    def maxCoins(self, nums: List[int]) -> int:
+        def compute(dp: dict, arr: List[int], l: int, r: int) -> int:
+            if l == r:
+                return 0
+
+            key = (l, r)
+            if key in dp:
+                return dp[key]
+
+            best = 0
+            for m in range(l, r):
+                left_best = compute(dp, arr, l, m)
+                cur_best = (
+                    (arr[l - 1] if l > 0 else 1)
+                    * arr[m]
+                    * (arr[r] if r < len(arr) else 1)
+                )
+                right_best = compute(dp, arr, m + 1, r)
+                best = max(best, left_best + cur_best + right_best)
+
+            dp[key] = best
+            return best
+
+        return compute({}, nums, 0, len(nums))
+
+
 # O(n^3)
 class Solution:
     def maxCoins(self, nums: List[int]) -> int:
