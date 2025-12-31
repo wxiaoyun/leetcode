@@ -44,12 +44,10 @@ class Solution:
 
         for c in range(col):
             cell_start = (0, c)
-            if cell_start not in waters:
-                uf.union(START, cell_start)
+            uf.union(START, cell_start)
 
             cell_end = (row - 1, c)
-            if cell_end not in waters:
-                uf.union(END, cell_end)
+            uf.union(END, cell_end)
 
         for r in range(row):
             for c in range(col):
@@ -72,12 +70,6 @@ class Solution:
             r, c = cells[i]
             r, c = r - 1, c - 1
             cell = (r, c)
-
-            if r == 0:
-                uf.union(START, cell)
-            elif r == row - 1:
-                uf.union(END, cell)
-
             waters.remove(cell)
             for nb in [
                 (r - 1, c),
