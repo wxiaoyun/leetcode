@@ -5,20 +5,18 @@ from typing import List
 
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
-        carry_over = 1
+        carry = 1
 
         for i in reversed(range(len(digits))):
-            if carry_over == 0:
+            digits[i] += carry
+            if digits[i] < 10:
+                carry = 0
                 break
 
-            digits[i] += carry_over
-            if digits[i] < 10:
-                carry_over = 0
-                continue
-
             digits[i] = 0
-            carry_over = 1
+            carry = 1
 
-        if carry_over:
+        if carry:
             digits.insert(0, 1)
+
         return digits
