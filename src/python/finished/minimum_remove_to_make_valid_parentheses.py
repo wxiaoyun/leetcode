@@ -5,6 +5,24 @@ from typing import List
 
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
+        keep = [False] * len(s)
+        b_stack = []
+        for i, ch in enumerate(s):
+            match ch:
+                case "(":
+                    b_stack.append(i)
+                case ")":
+                    if b_stack:
+                        keep[b_stack.pop()] = True
+                        keep[i] = True
+                case _:
+                    keep[i] = True
+
+        return "".join(ch for i, ch in enumerate(s) if keep[i])
+
+
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
         include_char = [False] * len(s)
         bracket_stack: List[int] = []
 
