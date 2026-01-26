@@ -6,15 +6,17 @@ from typing import List
 class Solution:
     def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:
         pairs = []
+        min_pair = 1 << 31
 
         arr = sorted(arr)
         for i in range(1, len(arr)):
             diff = arr[i] - arr[i - 1]
 
-            if pairs and diff < (pairs[-1][1] - pairs[-1][0]):
-                pairs = []
+            if diff < min_pair:
+                pairs.clear()
+                min_pair = diff
 
-            if not pairs or diff == (pairs[-1][1] - pairs[-1][0]):
+            if not pairs or diff == min_pair:
                 pairs.append([arr[i - 1], arr[i]])
 
         return pairs
