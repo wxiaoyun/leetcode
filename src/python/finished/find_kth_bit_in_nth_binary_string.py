@@ -2,6 +2,42 @@
 
 from typing import List, Optional
 
+
+class Solution:
+    def findKthBit(self, n: int, k: int) -> str:
+        dp = {}
+
+        def slen(n: int) -> int:
+            if n == 1:
+                return 1
+            if n in dp:
+                return dp[n]
+            l = 2 * slen(n - 1) + 1
+            dp[n] = l
+            return l
+
+        def helper(n: int, k: int, invert: bool = False) -> str:
+            # print(n, k, invert)
+            if n == 1:
+                assert k == 1
+                return "0" if not invert else "1"
+
+            l = slen(n)
+            half_len = l // 2
+
+            if k <= half_len:
+                return helper(n - 1, k, invert)
+
+            if k == half_len + 1:
+                return "1" if not invert else "0"
+
+            half_k = k - 1 - half_len
+            half_k_inverse = half_len - half_k + 1
+            return helper(n - 1, half_k_inverse, not invert)
+
+        return helper(n, k)
+
+
 class Solution:
     def findKthBit(self, n: int, k: int) -> str:
         # n | length:
@@ -26,38 +62,37 @@ class Solution:
         # Post submission remark: Len calculation can be optimized with (1 << n) - 1
         memo_len: List[Optional[int]] = [None] * n
         memo_len[0] = 1
+
         def calc_len(n: int) -> int:
-          if memo_len[n-1] != None:
-            return memo_len[n-1]
-          
-          l = calc_len(n-1) * 2 +1
-          memo_len[n-1] = l
-          return l
+            if memo_len[n - 1] != None:
+                return memo_len[n - 1]
+
+            l = calc_len(n - 1) * 2 + 1
+            memo_len[n - 1] = l
+            return l
 
         def helper(n: int, k: int) -> str:
-          if n == 1:
-            if k == 1:
-              return "0"
-            else:
-              raise Exception("Invalid arguments: n == 1 yet k != 1", k)
-          
-          l = calc_len(n)
-          mid = (l-1) // 2 + 1
+            if n == 1:
+                if k == 1:
+                    return "0"
+                else:
+                    raise Exception("Invalid arguments: n == 1 yet k != 1", k)
 
-          if k == mid:
-            return "1"
-          elif k < mid:
-            return helper(n-1, k)
-          else: #k > mid
-            # "0111001 1 0110001"
-            #              ^ 11th
-            # "011 1 001"
-            #        ^ 5th
-            # "0 1 1"
-            # "0"
-            b = helper(n-1, 2*mid - k)
-            return "1" if b == "0" else "0" # Invert
+            l = calc_len(n)
+            mid = (l - 1) // 2 + 1
+
+            if k == mid:
+                return "1"
+            elif k < mid:
+                return helper(n - 1, k)
+            else:  # k > mid
+                # "0111001 1 0110001"
+                #              ^ 11th
+                # "011 1 001"
+                #        ^ 5th
+                # "0 1 1"
+                # "0"
+                b = helper(n - 1, 2 * mid - k)
+                return "1" if b == "0" else "0"  # Invert
 
         return helper(n, k)
-
-
