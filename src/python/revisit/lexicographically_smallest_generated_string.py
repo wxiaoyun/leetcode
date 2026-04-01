@@ -1,3 +1,6 @@
+# https://leetcode.com/problems/lexicographically-smallest-generated-string/
+
+
 class Solution:
     def generateString(self, str1: str, str2: str) -> str:
         n, m = len(str1), len(str2)
