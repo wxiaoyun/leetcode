@@ -26,7 +26,7 @@ class Solution:
                 steps = cmd
                 dx, dy = dir_delta[dir]
                 for _ in range(steps):
-                    next_x, next_y = cur_x + dx, cur_y + dy
+                    next_x , next_y = cur_x + dx, cur_y + dy
                     if (next_x, next_y) in ob_set:
                         break
                     cur_x, cur_y = next_x, next_y
