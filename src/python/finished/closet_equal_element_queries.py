@@ -43,27 +43,14 @@ class Solution:
             l_index = (search_list_index - 1) % len(search_list)
             r_index = (search_list_index + 1) % len(search_list)
 
-            if search_list[l_index] != i:
-                best = min(
-                    best,
-                    abs(search_list[l_index] - i),
-                    n - abs(search_list[l_index] - i),
-                )
-                # print("l", best)
-            if search_list[search_list_index] != i:
-                best = min(
-                    best,
-                    abs(search_list[search_list_index] - i),
-                    n - abs(search_list[search_list_index] - i),
-                )
-                # print("c", best)
-            if search_list[r_index] != i:
-                best = min(
-                    best,
-                    abs(search_list[r_index] - i),
-                    n - abs(search_list[r_index] - i),
-                )
-                # print("r", best)
+            best = min(
+                best, abs(search_list[l_index] - i), n - abs(search_list[l_index] - i)
+            )
+            # print("l", best)
+            best = min(
+                best, abs(search_list[r_index] - i), n - abs(search_list[r_index] - i)
+            )
+            # print("r", best)
 
             res.append(best)
 
