@@ -6,6 +6,22 @@ from typing import List
 class Solution:
     def maxDistance(self, nums1: List[int], nums2: List[int]) -> int:
         best = 0
+        i2 = 0
+
+        for i1, n in enumerate(nums1):
+            i2 = max(i2, i1)
+            while i2 < len(nums2) and n <= nums2[i2]:
+                best = max(best, i2 - i1)
+                i2 += 1
+            if i2 >= len(nums2):
+                break
+
+        return best
+
+
+class Solution:
+    def maxDistance(self, nums1: List[int], nums2: List[int]) -> int:
+        best = 0
         for i, n in enumerate(nums1):
             if i >= len(nums2):
                 break
