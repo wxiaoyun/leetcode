@@ -19,17 +19,19 @@ class Solution:
             for i in range(N):
                 n = nums[i]
 
-                cur_sum = prefix_count.setdefault(n, 0) * i - prefix_offset.setdefault(n, 0)
+                cur_sum = prefix_count.setdefault(n, 0) * i - prefix_offset.setdefault(
+                    n, 0
+                )
                 ans[i] = cur_sum
 
                 prefix_count[n] += 1
                 prefix_offset[n] += i
 
             return ans
-        
+
         ans = helper(nums)
         rev_ans = helper(list(reversed(nums)))
-        
+
         for i, n in enumerate(rev_ans):
             ans[len(nums) - 1 - i] += n
         return ans
