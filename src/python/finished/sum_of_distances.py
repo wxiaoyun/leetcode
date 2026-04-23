@@ -1,18 +1,11 @@
 from typing import List
 
+
 # https://leetcode.com/problems/sum-of-distances
-
-
 class Solution:
     def distance(self, nums: List[int]) -> List[int]:
         def helper(nums: List[int]) -> List[int]:
             N = len(nums)
-            stacks = {}
-            for i in reversed(range(N)):
-                n = nums[i]
-                stk = stacks.setdefault(n, [])
-                stk.append(i)
-
             ans = [0] * N
             prefix_count = {}
             prefix_offset = {}
