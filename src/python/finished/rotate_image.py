@@ -9,6 +9,24 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
+        n, m = len(matrix), len(matrix[0])
+
+        # mirror along y axis
+        for i in range(n):
+            for j in range(i + 1, m):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+
+        # transpose
+        for i in range(n):
+            for j in range(m // 2):
+                matrix[i][j], matrix[i][m - 1 - j] = matrix[i][m - 1 - j], matrix[i][j]
+
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
 
         # (0, 0) -> (0, n - 1)
         # (0, 1) -> (1, n - 1)
