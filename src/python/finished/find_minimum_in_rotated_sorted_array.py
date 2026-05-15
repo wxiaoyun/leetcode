@@ -24,19 +24,20 @@ class Solution:
 
             # invariant: l <= pivot < r
 
-            if r - l <= 2:
-                return min(nums[l:r])
-
             if nums[l] < nums[m]:
                 # turning point is on our right
                 # m <= pivot
-                l = m
+                l = m + 1
                 # print("R")
             else:  # nums[l] > nums[m]
                 # l <= pivot <= m
                 ans = m
-                r = m + 1
+                r = m
                 # print("L")
+
+            # maintain invariant
+            if m + 1 < len(nums) and nums[m] > nums[m + 1]:
+                return nums[m + 1]
 
         return ans
 
