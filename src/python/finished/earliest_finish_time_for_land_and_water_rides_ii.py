@@ -24,8 +24,12 @@ class Solution:
         LAND, WATER = 1 << 0, 1 << 1
         DONE = LAND | WATER
         pq = [(0, 0)]
+        visited = set()
         while pq:
             t, state = heapq.heappop(pq)
+            if (t, state) in visited:
+                continue
+            visited.add((t, state))
             if state == DONE:
                 return t
 
