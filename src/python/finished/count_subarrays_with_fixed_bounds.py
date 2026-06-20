@@ -5,6 +5,52 @@ from typing import List
 
 class Solution:
     def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
+        cnt = 0
+
+        violate_idx = -1
+
+        min_stk = []  # monotonically increasing
+        max_stk = []  # monotonically decreasing
+        for i, n in enumerate(nums):
+            while min_stk and (nums[min_stk[-1]] >= n or nums[min_stk[-1]] < minK):
+                min_stk.pop()
+            min_stk.append(i)
+
+            while max_stk and (nums[max_stk[-1]] <= n or nums[max_stk[-1]] > maxK):
+                max_stk.pop()
+            max_stk.append(i)
+
+            done = False
+            while not done:
+                done = True
+                if min_stk and (min_stk[0] < violate_idx or nums[min_stk[0]] < minK):
+                    violate_idx = max(violate_idx, min_stk.pop())
+                    done = False
+
+                if max_stk and (max_stk[0] < violate_idx or nums[max_stk[0]] > maxK):
+                    violate_idx = max(violate_idx, max_stk.pop())
+                    done = False
+
+            # print(i)
+            # print(list((i, nums[i]) for i in min_stk))
+            # print(list((i, nums[i]) for i in max_stk))
+            # print(violate_idx)
+
+            if not (min_stk and max_stk) or (
+                nums[min_stk[0]] != minK or nums[max_stk[0]] != maxK
+            ):
+                continue
+
+            l = violate_idx
+            r = min(min_stk[0], max_stk[0])
+            # print(l, r)
+            cnt += max(0, r - l)
+
+        return cnt
+
+
+class Solution:
+    def countSubarrays(self, nums: List[int], minK: int, maxK: int) -> int:
         def count_continguous(arr: List[int], k: int) -> List[int]:
             N = len(arr)
             res = []
